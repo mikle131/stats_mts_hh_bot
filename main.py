@@ -17,10 +17,10 @@ btn1=types.KeyboardButton('Получить данные')
 markup.add(btn1)
 
 options = Options()
-options.add_argument('--headless')
-options.add_argument('--no-sandbox')
-options.add_argument('--disable-dev-shm-usage')
+options.add_argument("--headless")
+options.add_argument("--no-sandbox") # No need if running without su
 driver = webdriver.Chrome(options=options)
+
 wait = WebDriverWait(driver, 20)
 
 def get_vacancies_mts():
