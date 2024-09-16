@@ -7,7 +7,10 @@ import telebot
 from telebot import types
 import requests
 from selenium.webdriver.chrome.options import Options
-import os
+from pyvirtualdisplay import Display
+from selenium import webdriver
+display = Display(visible=0, size=(800,600))
+display.start()
 
 markup=types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
 btn1=types.KeyboardButton('Получить данные')
@@ -17,7 +20,7 @@ options = Options()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(options=options)
 wait = WebDriverWait(driver, 20)
 
 def get_vacancies_mts():
