@@ -7,18 +7,18 @@ import telebot
 from telebot import types
 import requests
 from selenium.webdriver.chrome.options import Options
-from pyvirtualdisplay import Display
 from selenium import webdriver
-display = Display(visible=0, size=(800,600))
-display.start()
 
 markup=types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
 btn1=types.KeyboardButton('Получить данные')
 markup.add(btn1)
 
+from xvfbwrapper import Xvfb
+vdisplay = Xvfb(width=800, height=1280)
+vdisplay.start()
+
 options = Options()
-options.add_argument("--headless")
-options.add_argument("--no-sandbox") # No need if running without su
+options.add_argument("--no-sandbox")
 driver = webdriver.Chrome(options=options)
 
 wait = WebDriverWait(driver, 20)
@@ -44,7 +44,7 @@ def get_num_vacancies_hh():
     return e['open_vacancies']
 
 
-token = '7533477541:AAF6LkjA2iMgLeDgIQjf8OzRnFEJwIMhNnk'
+token = ''
 bot=telebot.TeleBot(token)
 @bot.message_handler(commands=['start'])
 def start_message(message):
